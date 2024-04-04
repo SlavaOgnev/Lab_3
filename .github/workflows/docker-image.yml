@@ -32,7 +32,7 @@ jobs:
         git config --global user.name "slavaognev"
         git add output.txt
         git commit -m "Add output.txt"
-        git push --set-upstream origin HEAD:${{ steps.branch_name.outputs.branch }} --force
+	git push origin HEAD:main
 
       env:
         GITHUB_TOKEN: ${{ secrets.TOCKEN }}
