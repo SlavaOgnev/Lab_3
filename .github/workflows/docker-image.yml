@@ -2,26 +2,32 @@ name: Docker Build
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches:
+      - main
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN }}/te$
-      - name: Push the Docker image
-        run: docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PASSWORD }}
-      - name: push image on DockerHub
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: true
-          tags: ${{ secrets.DOCKER_LOGIN }}/test:latest
+    - name: Check Out Repository
+      uses: actions/checkout@v2
 
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Build Docker Image
+      run: docker build -t my-docker-image .
+
+    - name: Save Output File
+      run: docker run --rm my-docker-image cat /output.txt > output.txt
+
+    - name: Commit Changes
+      run: |
+        git config --global user.email "Grindy2004@mail.ru"
+        git config --global user.name "slavaognev"
+        git add output.txt
+        git commit -m "Add output.txt"
+        git push --set-upstream origin HEAD:${GITHUB_REF#refs/heads/} --force
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
