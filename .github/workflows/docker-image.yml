@@ -18,6 +18,10 @@ jobs:
 
     - name: Build Docker Image
       run: docker build -t my-docker-image .
+    - name: Get current branch
+      id: branch_name
+      run: echo ::set-output name=branch::$(echo $GITHUB_REF | awk -F'/' '{print $3}')
+
 
     - name: Save Output File
       run: docker run --rm my-docker-image cat /output.txt > output.txt
@@ -28,6 +32,7 @@ jobs:
         git config --global user.name "slavaognev"
         git add output.txt
         git commit -m "Add output.txt"
-        git push --set-upstream origin HEAD:${GITHUB_REF#refs/heads/} --force
+        git push --set-upstream origin HEAD:${{ steps.branch_name.outputs.branch }} --force
+
       env:
         GITHUB_TOKEN: ${{ secrets.TOCKEN }}
