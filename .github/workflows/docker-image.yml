@@ -30,4 +30,4 @@ jobs:
         git commit -m "Add output.txt"
         git push --set-upstream origin HEAD:${GITHUB_REF#refs/heads/} --force
       env:
-        GITHUB_TOKEN: ${{ secrets.for oblaka }}
+        GITHUB_TOKEN: ${{ secrets.TOCKEN }}
