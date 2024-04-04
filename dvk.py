@@ -1,6 +1,6 @@
 from datetime import datetime
 
-# Получаем текущую дату
+# sПолучаем текущую дату
 current_date = datetime.now()
 
 # Получаем дату Нового года для текущего года
