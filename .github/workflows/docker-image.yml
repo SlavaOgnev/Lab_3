@@ -1,4 +1,4 @@
-name: buildd docker
+name: build docker
 on:
   push:
     branches:
