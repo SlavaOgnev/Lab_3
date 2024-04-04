@@ -15,8 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ${{ secrets.user 
-}}/test:latest
+      run: docker build . --file Dockerfile --tag ${{ secrets.user }}/test:latest
     - name: Push the Docker image
       run: docker login -u ${{ secrets.user }} -p ${{ secrets.password }}
     - name: push image on DockerHub
