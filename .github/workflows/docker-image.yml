@@ -12,16 +12,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ 
-secrets.DOCKER_LOGIN }}/test:latest
-      - name: Push the Docker image run: docker build . --file Dockerfile 
---tag ${{ secrets.DOCKER_LOGIN}}/te$
-    - name: Push the Docker image
-run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN}}/te$
-    - name: Push the Docker image
-      run: docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ 
-secrets.DOCKER_PA$
-    - name: push image on DockerHub
+        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN }}/test:latest
+      - name: Push the Docker image run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN}}/te$
+      - name: Push the Docker image
+	run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN}}/te$
+      - name: Push the Docker image
+      run: docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PA$
+      - name: push image on DockerHub
       uses: docker/build-push-action@v3
       with:
         context: .
