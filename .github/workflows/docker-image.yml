@@ -7,20 +7,22 @@ on:
     branches: [ "main" ]
 
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN }}/test:latest
-      - name: Push the Docker image run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN}}/te$
-      - name: Push the Docker image
-	run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN}}/te$
-      - name: Push the Docker image
+    - uses: actions/checkout@v2  # Обновляем действие checkout до версии 
+v2
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag ${{ secrets.DOCKER_LOGIN}}/te$
+    - name: Push the Docker image
       run: docker login -u ${{ secrets.DOCKER_LOGIN }} -p ${{ secrets.DOCKER_PA$
-      - name: push image on DockerHub
+    - name: push image on DockerHub
       uses: docker/build-push-action@v3
       with:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_LOGIN }}/test:latest
+
